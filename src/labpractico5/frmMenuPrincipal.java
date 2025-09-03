@@ -91,6 +91,11 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
         jMenu1.add(jMenuItem2);
 
         jMenuItem1.setText("Buscar Cliente");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem1);
 
         jMenuItem10.setText("Borrar Cliente");
@@ -169,6 +174,12 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
         escritorio.add(ventanaCiudad);
         ventanaCiudad.setVisible(true);
     }//GEN-LAST:event_jMenuItem11ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+       ventanaBuscarCliente ventanBuscarC= new ventanaBuscarCliente();
+       escritorio.add(ventanBuscarC);
+       ventanBuscarC.setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments

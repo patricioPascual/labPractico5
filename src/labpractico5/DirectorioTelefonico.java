@@ -19,6 +19,7 @@ public class DirectorioTelefonico {
     public  TreeMap<Long,Cliente> directorio;
 
     public DirectorioTelefonico() {
+        this.directorio=new TreeMap();
     }
     
     public void agregarContacto(Long numero , Cliente cliente){
