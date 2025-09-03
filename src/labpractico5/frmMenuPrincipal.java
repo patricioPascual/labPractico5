@@ -99,6 +99,11 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
         jMenu1.add(jMenuItem1);
 
         jMenuItem10.setText("Borrar Cliente");
+        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem10ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem10);
 
         jMenuBar1.add(jMenu1);
@@ -180,6 +185,12 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
        escritorio.add(ventanBuscarC);
        ventanBuscarC.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
+   VentanaBorrarCliente ventanaBorrar= new VentanaBorrarCliente();
+   escritorio.add(ventanaBorrar);
+   ventanaBorrar.setVisible(true);
+    }//GEN-LAST:event_jMenuItem10ActionPerformed
 
     /**
      * @param args the command line arguments

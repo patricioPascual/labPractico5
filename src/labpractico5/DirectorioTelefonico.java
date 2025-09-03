@@ -33,6 +33,11 @@ public class DirectorioTelefonico {
      } 
      return null;
 }
+
+    public TreeMap<Long, Cliente> getDirectorio() {
+        return directorio;
+    }
+
     public Set buscarTelefono(String apellido){
         Set<Long> listaNumeros = new HashSet();
         for(Map.Entry<Long,Cliente>  aux : directorio.entrySet()){
@@ -43,5 +48,8 @@ public class DirectorioTelefonico {
             
         }
       return listaNumeros;
+    }
+    public void BorraContacto(Long telefono){
+        directorio.remove(telefono);
     }
 }
