@@ -177,16 +177,23 @@ public class ventAgregarCliente extends javax.swing.JInternalFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
                
-        int dni= Integer.parseInt( txtDni.getText());
-         String apellido= txtApellido.getText();
-         String nombre= txtNombre.getText();
-         String domicilio=txtDomicilio.getText();
-        Cliente nuevo= new Cliente(dni,nombre,apellido,domicilio);
-        Long telefono= (Long.parseLong(txtTelefono.getText()));
-       
-        frmMenuPrincipal.direct.agregarContacto(telefono, nuevo);
-        String ciudad= (String) comboCiudad.getSelectedItem();
-        frmMenuPrincipal.directorioPrincipal.put(ciudad, frmMenuPrincipal.direct);
+       int dni = Integer.parseInt(txtDni.getText());
+String apellido = txtApellido.getText();
+String nombre = txtNombre.getText();
+String domicilio = txtDomicilio.getText();
+Cliente nuevo = new Cliente(dni, nombre, apellido, domicilio);
+Long telefono = (Long.parseLong(txtTelefono.getText()));
+
+String ciudad = (String) comboCiudad.getSelectedItem();
+
+// Obtiene el directorio de la ciudad o crea uno nuevo si no existe.
+DirectorioTelefonico directorioCiudad = frmMenuPrincipal.directorioPrincipal.getOrDefault(ciudad, new DirectorioTelefonico());
+
+// Agrega el nuevo contacto al directorio de esa ciudad.
+directorioCiudad.agregarContacto(telefono, nuevo);
+
+// Actualiza el mapa con el directorio correcto para la ciudad.
+frmMenuPrincipal.directorioPrincipal.put(ciudad, directorioCiudad);
         
     }//GEN-LAST:event_jButton1ActionPerformed
 

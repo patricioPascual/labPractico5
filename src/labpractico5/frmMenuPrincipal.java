@@ -113,6 +113,11 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
         jMenu5.setText("Directorio");
 
         jMenuItem13.setText("Buscar Cliente por ciudad");
+        jMenuItem13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem13ActionPerformed(evt);
+            }
+        });
         jMenu5.add(jMenuItem13);
 
         jMenuItem14.setText("Buscar telefono por apellido");
@@ -191,6 +196,13 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
    escritorio.add(ventanaBorrar);
    ventanaBorrar.setVisible(true);
     }//GEN-LAST:event_jMenuItem10ActionPerformed
+
+    private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
+        VentanaBuscarCiudad ventanaBuscarCiudad= new VentanaBuscarCiudad();
+        escritorio.add(ventanaBuscarCiudad);
+        ventanaBuscarCiudad.setVisible(true);
+        
+    }//GEN-LAST:event_jMenuItem13ActionPerformed
 
     /**
      * @param args the command line arguments
