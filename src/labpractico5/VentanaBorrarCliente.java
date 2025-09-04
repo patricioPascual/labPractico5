@@ -50,7 +50,6 @@ public class VentanaBorrarCliente extends javax.swing.JInternalFrame {
         tabla = new javax.swing.JTable();
         borrarDni = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setText("DNI");
@@ -89,17 +88,10 @@ public class VentanaBorrarCliente extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton1.setText("Buscar");
+        jButton1.setText("jButton1");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
-            }
-        });
-
-        jButton2.setText("Borrar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
             }
         });
 
@@ -117,19 +109,17 @@ public class VentanaBorrarCliente extends javax.swing.JInternalFrame {
                         .addGap(116, 116, 116))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(41, 41, 41)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(39, 39, 39)
-                                .addComponent(jButton1)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2)))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(175, 175, 175))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(234, 234, 234)
+                .addComponent(jButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -147,11 +137,9 @@ public class VentanaBorrarCliente extends javax.swing.JInternalFrame {
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addContainerGap(10, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(25, 25, 25))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -174,11 +162,16 @@ public class VentanaBorrarCliente extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_borrarDniActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-      
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void listaDniValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listaDniValueChanged
+         if (!evt.getValueIsAdjusting()) {
+            // Solo ejecutar el código cuando la selección ha finalizado
+            CargarDatos();
+        }
+       
+    }//GEN-LAST:event_listaDniValueChanged
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       DefaultListModel modeloLista= (DefaultListModel)listaDni.getModel();
         DefaultTableModel model = (DefaultTableModel) tabla.getModel();
         for (Map.Entry<String, DirectorioTelefonico> aux : frmMenuPrincipal.directorioPrincipal.entrySet()) {
             DirectorioTelefonico directorio = aux.getValue();
@@ -192,18 +185,13 @@ public class VentanaBorrarCliente extends javax.swing.JInternalFrame {
         }
         borrarDni.setText(" ");
         model.setRowCount(0);
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void listaDniValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listaDniValueChanged
-        
-        CargarDatos();
-    }//GEN-LAST:event_listaDniValueChanged
+        modeloLista.clear();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField borrarDni;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
@@ -232,7 +220,7 @@ public class VentanaBorrarCliente extends javax.swing.JInternalFrame {
      
      String dniSeleccionadoStr = listaDni.getSelectedValue();
        DefaultTableModel model = (DefaultTableModel) tabla.getModel();
-        
+        model.setRowCount(0);
        
      for (Map.Entry<String, DirectorioTelefonico> aux : frmMenuPrincipal.directorioPrincipal.entrySet()) {
                             DirectorioTelefonico directorio = aux.getValue();
