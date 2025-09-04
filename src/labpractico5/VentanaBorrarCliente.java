@@ -8,6 +8,8 @@ import java.util.Map;
 import javax.swing.DefaultListModel;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -15,12 +17,19 @@ import javax.swing.table.DefaultTableModel;
  * @author patri
  */
 public class VentanaBorrarCliente extends javax.swing.JInternalFrame {
-
+ private DefaultListModel<String> modeloLista;
     /**
      * Creates new form VentanaBorrarCliente
      */
     public VentanaBorrarCliente() {
         initComponents();
+        modeloLista = new DefaultListModel<>();
+        
+       
+        listaDni.setModel(modeloLista);
+        llenarLista();
+       
+        
     }
 
     /**
@@ -104,8 +113,10 @@ public class VentanaBorrarCliente extends javax.swing.JInternalFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(41, 41, 41)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(39, 39, 39)
+                                .addComponent(jButton1)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -155,48 +166,24 @@ public class VentanaBorrarCliente extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void borrarDniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrarDniActionPerformed
-       
+
     }//GEN-LAST:event_borrarDniActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-   
-DefaultTableModel model = (DefaultTableModel) tabla.getModel();
-
-for (Map.Entry<String, DirectorioTelefonico> aux : frmMenuPrincipal.directorioPrincipal.entrySet()) {
-    DirectorioTelefonico directorio = aux.getValue();
-    
-    for (Map.Entry<Long, Cliente> aux2 : directorio.getDirectorio().entrySet()) {
-        Cliente buscado = aux2.getValue();
-        if(buscado.getDni() == Integer.parseInt(borrarDni.getText())){
-            
-            String[] fila = {
-               
-                buscado.getApellido(),
-                buscado.getNombre(),
-                buscado.getDomicilio(),
-                     aux.getKey(),
-                     aux2.getKey().toString()
-            };
-            
-            model.addRow(fila);
-        }
-    }
-}
-    
-    
+      
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         DefaultTableModel model = (DefaultTableModel) tabla.getModel();
         for (Map.Entry<String, DirectorioTelefonico> aux : frmMenuPrincipal.directorioPrincipal.entrySet()) {
-    DirectorioTelefonico directorio = aux.getValue();
-    
-    for (Map.Entry<Long, Cliente> aux2 : directorio.getDirectorio().entrySet()) {
-        Cliente buscado = aux2.getValue();
-        if(buscado.getDni() == Integer.parseInt(borrarDni.getText())){
-            directorio.BorraContacto(aux2.getKey());
-        }
-    }
+            DirectorioTelefonico directorio = aux.getValue();
+
+            for (Map.Entry<Long, Cliente> aux2 : directorio.getDirectorio().entrySet()) {
+                Cliente buscado = aux2.getValue();
+                if (buscado.getDni() == Integer.parseInt(listaDni.getSelectedValue())) {
+                    directorio.BorraContacto(aux2.getKey());
+                }
+            }
         }
         borrarDni.setText(" ");
         model.setRowCount(0);
@@ -215,4 +202,44 @@ for (Map.Entry<String, DirectorioTelefonico> aux : frmMenuPrincipal.directorioPr
     private javax.swing.JList<String> listaDni;
     private javax.swing.JTable tabla;
     // End of variables declaration//GEN-END:variables
+ public void llenarLista() {
+        // Usa el modelo de instancia, no intentes obtenerlo de la JList nuevamente
+        modeloLista.clear(); // Buena práctica para evitar duplicados
+        
+        // Tu bucle para llenar la lista
+        for (Map.Entry<String, DirectorioTelefonico> aux : frmMenuPrincipal.directorioPrincipal.entrySet()) {
+            DirectorioTelefonico directorio = aux.getValue();
+            for (Map.Entry<Long, Cliente> aux2 : directorio.getDirectorio().entrySet()) {
+                String dni = String.valueOf(aux2.getValue().getDni());
+                modeloLista.addElement(dni);
+            }
+        }
+    }
+    
+
+ 
+ public void CargarDatos(){
+     String dniSeleccionadoStr = listaDni.getSelectedValue();
+       DefaultTableModel model = (DefaultTableModel) tabla.getModel();
+     for (Map.Entry<String, DirectorioTelefonico> aux : frmMenuPrincipal.directorioPrincipal.entrySet()) {
+                            DirectorioTelefonico directorio = aux.getValue();
+
+                            for (Map.Entry<Long, Cliente> aux2 : directorio.getDirectorio().entrySet()) {
+                                Cliente buscado = aux2.getValue();
+                                if (buscado.getDni() == Integer.parseInt(borrarDni.getText())) {
+
+                                    String[] fila = {
+                                        buscado.getApellido(),
+                                        buscado.getNombre(),
+                                        buscado.getDomicilio(),
+                                        aux.getKey(),
+                                        aux2.getKey().toString()
+                                    };
+
+                                    model.addRow(fila);
+                                }
+                            }
+     }
+ }
 }
+                    

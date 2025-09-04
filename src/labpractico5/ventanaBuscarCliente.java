@@ -42,7 +42,7 @@ public class ventanaBuscarCliente extends javax.swing.JInternalFrame {
         buscarDni = new javax.swing.JTextField();
         buscarDomicilio = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        listaTelefono = new javax.swing.JList<>();
         buscarCliente = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
 
@@ -60,7 +60,13 @@ public class ventanaBuscarCliente extends javax.swing.JInternalFrame {
 
         jLabel7.setText("DOMICILIO");
 
-        jScrollPane1.setViewportView(jList1);
+        jScrollPane1.setViewportView(listaTelefono);
+
+        buscarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buscarClienteActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("jButton1");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -170,9 +176,14 @@ public class ventanaBuscarCliente extends javax.swing.JInternalFrame {
             buscarDni.setText(Integer.toString(buscado.getDni()));   
            
             buscarNombre.setText(buscado.getNombre());
+            buscarCiudad.setText(aux.getKey());
             buscarDomicilio.setText(buscado.getDomicilio());
     }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void buscarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarClienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buscarClienteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -190,8 +201,11 @@ public class ventanaBuscarCliente extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JList<String> jList1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JList<String> listaTelefono;
     // End of variables declaration//GEN-END:variables
+public void actualizaLista(){
+   
+}
 }
