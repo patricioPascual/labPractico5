@@ -55,6 +55,11 @@ public class VentanaBorrarCliente extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setText("DNI");
 
+        listaDni.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                listaDniValueChanged(evt);
+            }
+        });
         jScrollPane1.setViewportView(listaDni);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -143,7 +148,7 @@ public class VentanaBorrarCliente extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
                 .addContainerGap(10, Short.MAX_VALUE))
@@ -189,6 +194,11 @@ public class VentanaBorrarCliente extends javax.swing.JInternalFrame {
         model.setRowCount(0);
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void listaDniValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listaDniValueChanged
+        
+        CargarDatos();
+    }//GEN-LAST:event_listaDniValueChanged
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField borrarDni;
@@ -203,8 +213,8 @@ public class VentanaBorrarCliente extends javax.swing.JInternalFrame {
     private javax.swing.JTable tabla;
     // End of variables declaration//GEN-END:variables
  public void llenarLista() {
-        // Usa el modelo de instancia, no intentes obtenerlo de la JList nuevamente
-        modeloLista.clear(); // Buena práctica para evitar duplicados
+        
+        modeloLista.clear(); 
         
         // Tu bucle para llenar la lista
         for (Map.Entry<String, DirectorioTelefonico> aux : frmMenuPrincipal.directorioPrincipal.entrySet()) {
@@ -219,15 +229,18 @@ public class VentanaBorrarCliente extends javax.swing.JInternalFrame {
 
  
  public void CargarDatos(){
+     
      String dniSeleccionadoStr = listaDni.getSelectedValue();
        DefaultTableModel model = (DefaultTableModel) tabla.getModel();
+        
+       
      for (Map.Entry<String, DirectorioTelefonico> aux : frmMenuPrincipal.directorioPrincipal.entrySet()) {
                             DirectorioTelefonico directorio = aux.getValue();
 
                             for (Map.Entry<Long, Cliente> aux2 : directorio.getDirectorio().entrySet()) {
                                 Cliente buscado = aux2.getValue();
-                                if (buscado.getDni() == Integer.parseInt(borrarDni.getText())) {
-
+                                if (buscado.getDni() == Integer.parseInt(dniSeleccionadoStr) ) {
+                                     
                                     String[] fila = {
                                         buscado.getApellido(),
                                         buscado.getNombre(),
@@ -235,11 +248,13 @@ public class VentanaBorrarCliente extends javax.swing.JInternalFrame {
                                         aux.getKey(),
                                         aux2.getKey().toString()
                                     };
-
+                                    borrarDni.setText(dniSeleccionadoStr);
                                     model.addRow(fila);
+                                    
                                 }
                             }
      }
  }
 }
-                    
+
+                   
