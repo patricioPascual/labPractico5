@@ -5,18 +5,25 @@
 package labpractico5;
 
 import java.util.Map;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author patri
  */
 public class ventanaBuscarCliente extends javax.swing.JInternalFrame {
-
+    private DefaultListModel<Long> modelLista = new DefaultListModel();
     /**
      * Creates new form ventanaBuscarCliente
      */
     public ventanaBuscarCliente() {
         initComponents();
+        listaTelefono.setModel(modelLista);
+        llenarLista();
     }
 
     /**
@@ -44,7 +51,7 @@ public class ventanaBuscarCliente extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         listaTelefono = new javax.swing.JList<>();
         buscarCliente = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btnSalir = new javax.swing.JButton();
 
         jLabel1.setText("TELEFONO");
 
@@ -60,18 +67,18 @@ public class ventanaBuscarCliente extends javax.swing.JInternalFrame {
 
         jLabel7.setText("DOMICILIO");
 
-        jScrollPane1.setViewportView(listaTelefono);
-
-        buscarCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buscarClienteActionPerformed(evt);
+        listaTelefono.setModel(modelLista);
+        listaTelefono.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                listaTelefonoValueChanged(evt);
             }
         });
+        jScrollPane1.setViewportView(listaTelefono);
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnSalir.setText("Salir");
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnSalirActionPerformed(evt);
             }
         });
 
@@ -79,43 +86,46 @@ public class ventanaBuscarCliente extends javax.swing.JInternalFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(151, 151, 151)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(171, 171, 171))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(jLabel1)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(buscarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(60, 60, 60)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnSalir))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(8, 8, 8)
-                                .addComponent(jLabel3)))
-                        .addGap(14, 14, 14)
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(buscarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addGap(37, 37, 37)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(buscarDni, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
-                            .addComponent(buscarApellido)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel7))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(buscarDomicilio, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
-                            .addComponent(buscarCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
-                            .addComponent(buscarNombre))))
-                .addContainerGap())
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel7))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(buscarNombre, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(buscarCiudad, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(buscarDomicilio, javax.swing.GroupLayout.Alignment.TRAILING)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel3)
+                                        .addGap(24, 24, 24))
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(buscarApellido, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
+                                    .addComponent(buscarDni))))))
+                .addGap(28, 28, 28))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -126,30 +136,32 @@ public class ventanaBuscarCliente extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel3)
-                    .addComponent(buscarDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buscarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(buscarApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(buscarNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(buscarCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel7)
-                            .addComponent(buscarDomicilio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(22, 22, 22))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
+                .addGap(82, 82, 82))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(61, 61, 61)
+                .addComponent(buscarDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(buscarApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(buscarNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(buscarCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(buscarDomicilio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnSalir)
+                .addGap(21, 21, 21))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -160,40 +172,130 @@ public class ventanaBuscarCliente extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        dispose();
+    
+    }//GEN-LAST:event_btnSalirActionPerformed
+
+    private String buscarCiudad() {
+        String ciudad = "";
+        Cliente buscado;
         for(Map.Entry<String,DirectorioTelefonico> aux: frmMenuPrincipal.directorioPrincipal.entrySet() ){
-            Cliente buscado= aux.getValue().buscarContacto(Long.parseLong(buscarCliente.getText()));
+            buscado= aux.getValue().buscarContacto((listaTelefono.getSelectedValue()));
+            ciudad = aux.getKey();
+        }
+        
+        return ciudad;
+    }
+    
+    public void buscarContacto() {
+        for(Map.Entry<String,DirectorioTelefonico> aux: frmMenuPrincipal.directorioPrincipal.entrySet() ){
+            Cliente buscado= aux.getValue().buscarContacto((listaTelefono.getSelectedValue()));
             buscarApellido.setText(buscado.getApellido());
-            buscarDni.setText(Integer.toString(buscado.getDni()));   
-           
+            buscarDni.setText(Integer.toString(buscado.getDni()));              
             buscarNombre.setText(buscado.getNombre());
             buscarCiudad.setText(aux.getKey());
             buscarDomicilio.setText(buscado.getDomicilio());
+        }
+        
     }
-    }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void buscarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarClienteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_buscarClienteActionPerformed
+
+    public void llenarLista() {        
+        modelLista.clear(); 
+        
+        // Tu bucle para llenar la lista
+        for (Map.Entry<String, DirectorioTelefonico> aux : frmMenuPrincipal.directorioPrincipal.entrySet()) {
+            DirectorioTelefonico directorio = aux.getValue();
+            for (Map.Entry<Long, Cliente> aux2 : directorio.getDirectorio().entrySet()) {
+                Long telefono = Long.valueOf(aux2.getKey());
+                modelLista.addElement(telefono);
+            }
+        }
+    }
+    
+    /*public void cargarDatos() {
+        Long telefonoSeleccionado = listaTelefono.getSelectedValue();
+       
+        for (Map.Entry<String, DirectorioTelefonico> aux : frmMenuPrincipal.directorioPrincipal.entrySet()) {
+            DirectorioTelefonico directorio = aux.getValue();
+
+            for (Map.Entry<Long, Cliente> aux2 : directorio.getDirectorio().entrySet()) {
+                Cliente buscado = aux2.getValue();
+                if (buscado.getDni() == Integer.parseInt(dniSeleccionadoStr)) {
+
+                    buscarApellido.setText();.getApellido();                
+                    buscarNombre.getNombre();
+                    buscarDomicilio.getDomicilio();
+                    aux.getKey()
+                    aux2.getKey().toString()                                                                     
+                }
+            }
+     }
+    }*/
+    
+    /*private void cargarInformacionContacto() {
+        Long telefonoSeleccionado = listaTelefono.getSelectedValue();
+        
+        if (telefonoSeleccionado != null) {
+            Cliente cliente = frmMenuPrincipal.direct.buscarContacto(telefonoSeleccionado);
+            
+            for(Map.Entry<String,DirectorioTelefonico> aux: frmMenuPrincipal.directorioPrincipal.entrySet() ){
+                Cliente buscado= aux.getValue().buscarContacto((listaTelefono.getSelectedValue()));
+            }
+            
+            if (cliente != null) {
+                buscarDni.setText(Long.toString(cliente.getDni()));
+                buscarNombre.setText(cliente.getNombre());
+                buscarApellido.setText(cliente.getApellido());
+                buscarCiudad.setText(buscarCiudad());
+                buscarDomicilio.setText(cliente.getDomicilio());
+            } else {
+                limpiarCampos();
+            }
+        } else {
+            limpiarCampos();
+        }
+    }*/
+    
+    private void limpiarCampos() {
+        buscarDni.setText("");
+        buscarNombre.setText("");
+        buscarApellido.setText("");
+        buscarCiudad.setText("");
+        buscarDomicilio.setText("");
+        buscarCliente.setText("");
+    }
+    
+    private void listaTelefonoValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listaTelefonoValueChanged
+        listaTelefono.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if (!e.getValueIsAdjusting()) {
+                    buscarContacto();
+                }
+            }
+        });
+    }//GEN-LAST:event_listaTelefonoValueChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnSalir;
     private javax.swing.JTextField buscarApellido;
     private javax.swing.JTextField buscarCiudad;
     private javax.swing.JTextField buscarCliente;
     private javax.swing.JTextField buscarDni;
     private javax.swing.JTextField buscarDomicilio;
     private javax.swing.JTextField buscarNombre;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -203,9 +305,8 @@ public class ventanaBuscarCliente extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JList<String> listaTelefono;
+    private javax.swing.JList<Long> listaTelefono;
     // End of variables declaration//GEN-END:variables
-public void actualizaLista(){
-   
-}
+
+
 }

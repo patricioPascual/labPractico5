@@ -22,10 +22,14 @@ public class DirectorioTelefonico {
         this.directorio=new TreeMap();
     }
     
-    public void agregarContacto(Long numero , Cliente cliente){
-        
-        directorio.put(numero, cliente);
+    public boolean agregarContacto(Long telefono, Cliente cliente){
+        if(!directorio.containsKey(telefono)) {    
+            directorio.put(telefono, cliente);
+            return true;
+        }
+        return false;
     }
+    
     public Cliente buscarContacto(Long numero){
         
      if(directorio.containsKey(numero)){
@@ -33,7 +37,10 @@ public class DirectorioTelefonico {
      } 
      return null;
 }
-
+    public Set<Long> getTodosTelefonos() {
+        return directorio.keySet();
+    }
+    
     public TreeMap<Long, Cliente> getDirectorio() {
         return directorio;
     }

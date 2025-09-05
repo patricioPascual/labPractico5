@@ -6,6 +6,8 @@ package labpractico5;
 
 import java.util.TreeMap;
 import java.util.ArrayList;
+import java.util.Set;
+import javax.swing.JInternalFrame;
 /**
  *
  * @author patri
@@ -15,14 +17,15 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
      static TreeMap<String,DirectorioTelefonico> directorioPrincipal; 
      static ArrayList<String> ciudades ;
      static DirectorioTelefonico direct;
+     static Set<Long> telefonos;
     /**
      * Creates new form frmMenuPrincipal
      */
     public frmMenuPrincipal() {
         initComponents();
-       ciudades = new ArrayList<String>();
-      directorioPrincipal = new TreeMap<>();  
-       direct= new DirectorioTelefonico();
+        ciudades = new ArrayList<String>();
+        directorioPrincipal = new TreeMap<>();
+        direct = new DirectorioTelefonico();
     }
 
     /**
@@ -38,16 +41,16 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
         escritorio = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem10 = new javax.swing.JMenuItem();
+        menuAgregarCliente = new javax.swing.JMenuItem();
+        menuBuscarCliente = new javax.swing.JMenuItem();
+        menuBorrarCliente = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem13 = new javax.swing.JMenuItem();
         jMenuItem14 = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
-        jMenuItem11 = new javax.swing.JMenuItem();
+        menuAgregarCiudad = new javax.swing.JMenuItem();
         jMenu7 = new javax.swing.JMenu();
-        jMenuItem12 = new javax.swing.JMenuItem();
+        menuSalir = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -55,11 +58,11 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
         escritorio.setLayout(escritorioLayout);
         escritorioLayout.setHorizontalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 444, Short.MAX_VALUE)
+            .addGap(0, 836, Short.MAX_VALUE)
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 398, Short.MAX_VALUE)
+            .addGap(0, 493, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -67,6 +70,7 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(escritorio)
                 .addContainerGap())
         );
@@ -74,37 +78,37 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(escritorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(escritorio)
+                .addContainerGap())
         );
 
         jMenu1.setBackground(new java.awt.Color(0, 0, 0));
         jMenu1.setText("Clientes");
 
-        jMenuItem2.setBackground(new java.awt.Color(204, 204, 204));
-        jMenuItem2.setText("Agregar Cliente");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        menuAgregarCliente.setBackground(new java.awt.Color(204, 204, 204));
+        menuAgregarCliente.setText("Agregar Cliente");
+        menuAgregarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                menuAgregarClienteActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem2);
+        jMenu1.add(menuAgregarCliente);
 
-        jMenuItem1.setText("Buscar Cliente");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        menuBuscarCliente.setText("Buscar Cliente");
+        menuBuscarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                menuBuscarClienteActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
+        jMenu1.add(menuBuscarCliente);
 
-        jMenuItem10.setText("Borrar Cliente");
-        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
+        menuBorrarCliente.setText("Borrar Cliente");
+        menuBorrarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem10ActionPerformed(evt);
+                menuBorrarClienteActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem10);
+        jMenu1.add(menuBorrarCliente);
 
         jMenuBar1.add(jMenu1);
 
@@ -129,13 +133,13 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
         jMenu6.setForeground(new java.awt.Color(0, 0, 0));
         jMenu6.setText("Ciudades");
 
-        jMenuItem11.setText("Agregar Ciudad");
-        jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
+        menuAgregarCiudad.setText("Agregar Ciudad");
+        menuAgregarCiudad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem11ActionPerformed(evt);
+                menuAgregarCiudadActionPerformed(evt);
             }
         });
-        jMenu6.add(jMenuItem11);
+        jMenu6.add(menuAgregarCiudad);
 
         jMenuBar1.add(jMenu6);
 
@@ -143,13 +147,13 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
         jMenu7.setForeground(new java.awt.Color(0, 0, 0));
         jMenu7.setText("Salir");
 
-        jMenuItem12.setText("Salir");
-        jMenuItem12.addActionListener(new java.awt.event.ActionListener() {
+        menuSalir.setText("Salir");
+        menuSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem12ActionPerformed(evt);
+                menuSalirActionPerformed(evt);
             }
         });
-        jMenu7.add(jMenuItem12);
+        jMenu7.add(menuSalir);
 
         jMenuBar1.add(jMenu7);
 
@@ -169,41 +173,65 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-       ventAgregarCliente ventanaCliente= new ventAgregarCliente();
-       escritorio.add(ventanaCliente);
-       ventanaCliente.setVisible(true);
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    private void menuAgregarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAgregarClienteActionPerformed
+        ventAgregarCliente ventanaCliente = new ventAgregarCliente();
+        escritorio.add(ventanaCliente);
+        ventanaCliente.setVisible(true);
+        centrarInternalFrame(ventanaCliente);
+    }//GEN-LAST:event_menuAgregarClienteActionPerformed
 
-    private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
-       System.exit(0);
-    }//GEN-LAST:event_jMenuItem12ActionPerformed
+    private void menuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSalirActionPerformed
+       int opcion = javax.swing.JOptionPane.showConfirmDialog(
+                this,
+                "¿Seguro que querés Salir?",
+                "Confirmar Salida",
+                javax.swing.JOptionPane.YES_NO_OPTION,
+                javax.swing.JOptionPane.QUESTION_MESSAGE
+        );
+        
+        if (opcion == javax.swing.JOptionPane.YES_OPTION) {
+            
+            this.dispose();
+                    
+        }
+    }//GEN-LAST:event_menuSalirActionPerformed
 
-    private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
+    private void menuAgregarCiudadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAgregarCiudadActionPerformed
         ventAgregarCiudad ventanaCiudad = new ventAgregarCiudad();
         escritorio.add(ventanaCiudad);
         ventanaCiudad.setVisible(true);
-    }//GEN-LAST:event_jMenuItem11ActionPerformed
+        centrarInternalFrame(ventanaCiudad);
+    }//GEN-LAST:event_menuAgregarCiudadActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-       ventanaBuscarCliente ventanBuscarC= new ventanaBuscarCliente();
-       escritorio.add(ventanBuscarC);
-       ventanBuscarC.setVisible(true);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    private void menuBuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuBuscarClienteActionPerformed
+        ventanaBuscarCliente ventanBuscarC = new ventanaBuscarCliente();
+        escritorio.add(ventanBuscarC);
+        ventanBuscarC.setVisible(true);
+        centrarInternalFrame(ventanBuscarC);
+    }//GEN-LAST:event_menuBuscarClienteActionPerformed
 
-    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
-   VentanaBorrarCliente ventanaBorrar= new VentanaBorrarCliente();
-   escritorio.add(ventanaBorrar);
-   ventanaBorrar.setVisible(true);
-    }//GEN-LAST:event_jMenuItem10ActionPerformed
+    private void menuBorrarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuBorrarClienteActionPerformed
+        VentanaBorrarCliente ventanaBorrar = new VentanaBorrarCliente();
+        escritorio.add(ventanaBorrar);
+        ventanaBorrar.setVisible(true);
+        centrarInternalFrame(ventanaBorrar);
+    }//GEN-LAST:event_menuBorrarClienteActionPerformed
 
     private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
         VentanaBuscarCiudad ventanaBuscarCiudad= new VentanaBuscarCiudad();
         escritorio.add(ventanaBuscarCiudad);
         ventanaBuscarCiudad.setVisible(true);
+        centrarInternalFrame(ventanaBuscarCiudad);
         
     }//GEN-LAST:event_jMenuItem13ActionPerformed
 
+    private void centrarInternalFrame(JInternalFrame internalFrame) {
+        // Centrar el internal frame en el escritorio
+        int x = (escritorio.getWidth() - internalFrame.getWidth()) / 2;
+        int y = (escritorio.getHeight() - internalFrame.getHeight()) / 2;
+        internalFrame.setLocation(x, y);
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -246,13 +274,13 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenu7;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem10;
-    private javax.swing.JMenuItem jMenuItem11;
-    private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem13;
     private javax.swing.JMenuItem jMenuItem14;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JMenuItem menuAgregarCiudad;
+    private javax.swing.JMenuItem menuAgregarCliente;
+    private javax.swing.JMenuItem menuBorrarCliente;
+    private javax.swing.JMenuItem menuBuscarCliente;
+    private javax.swing.JMenuItem menuSalir;
     // End of variables declaration//GEN-END:variables
 }
