@@ -146,9 +146,24 @@ public class ventAgregarCiudad extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        agregarCiudad(txtCiudad.getText());
-        limpiarCampos();
-       
+        String ciudad = txtCiudad.getText().trim();
+
+    // Validacion de datos, para  que no esté vacío y que solo tenga letras y espacios
+    if (ciudad.isEmpty() || !ciudad.matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑ\\s]+$")) {
+        JOptionPane.showMessageDialog(
+            this,
+            "Por favor ingrese solo letras para el nombre de la ciudad.",
+            "Entrada inválida",
+            JOptionPane.WARNING_MESSAGE
+        );
+        txtCiudad.requestFocus();
+        return; // Para poder salir sin guardar
+    }
+
+    // Si pasa la validación, guardar y limpiar
+    agregarCiudad(ciudad);
+    limpiarCampos();
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
 

@@ -75,6 +75,12 @@ public class ventanaBuscarCliente extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(listaTelefono);
 
+        buscarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buscarClienteActionPerformed(evt);
+            }
+        });
+
         btnSalir.setText("Salir");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -286,6 +292,10 @@ public class ventanaBuscarCliente extends javax.swing.JInternalFrame {
             }
         });
     }//GEN-LAST:event_listaTelefonoValueChanged
+
+    private void buscarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarClienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buscarClienteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
