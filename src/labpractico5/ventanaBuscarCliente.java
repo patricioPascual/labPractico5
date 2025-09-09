@@ -4,6 +4,8 @@
  */
 package labpractico5;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Map;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
@@ -75,9 +77,9 @@ public class ventanaBuscarCliente extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(listaTelefono);
 
-        buscarCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buscarClienteActionPerformed(evt);
+        buscarCliente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                buscarClienteKeyTyped(evt);
             }
         });
 
@@ -191,18 +193,7 @@ public class ventanaBuscarCliente extends javax.swing.JInternalFrame {
         dispose();
     
     }//GEN-LAST:event_btnSalirActionPerformed
-
-    private String buscarCiudad() {
-        String ciudad = "";
-        Cliente buscado;
-        for(Map.Entry<String,DirectorioTelefonico> aux: frmMenuPrincipal.directorioPrincipal.entrySet() ){
-            buscado= aux.getValue().buscarContacto((listaTelefono.getSelectedValue()));
-            ciudad = aux.getKey();
-        }
-        
-        return ciudad;
-    }
-    
+   
     public void buscarContacto() {
         for(Map.Entry<String,DirectorioTelefonico> aux: frmMenuPrincipal.directorioPrincipal.entrySet() ){
             Cliente buscado= aux.getValue().buscarContacto((listaTelefono.getSelectedValue()));
@@ -211,15 +202,13 @@ public class ventanaBuscarCliente extends javax.swing.JInternalFrame {
             buscarNombre.setText(buscado.getNombre());
             buscarCiudad.setText(aux.getKey());
             buscarDomicilio.setText(buscado.getDomicilio());
-        }
-        
+        }      
     }
 
 
     public void llenarLista() {        
         modelLista.clear(); 
         
-        // Tu bucle para llenar la lista
         for (Map.Entry<String, DirectorioTelefonico> aux : frmMenuPrincipal.directorioPrincipal.entrySet()) {
             DirectorioTelefonico directorio = aux.getValue();
             for (Map.Entry<Long, Cliente> aux2 : directorio.getDirectorio().entrySet()) {
@@ -228,51 +217,7 @@ public class ventanaBuscarCliente extends javax.swing.JInternalFrame {
             }
         }
     }
-    
-    /*public void cargarDatos() {
-        Long telefonoSeleccionado = listaTelefono.getSelectedValue();
-       
-        for (Map.Entry<String, DirectorioTelefonico> aux : frmMenuPrincipal.directorioPrincipal.entrySet()) {
-            DirectorioTelefonico directorio = aux.getValue();
 
-            for (Map.Entry<Long, Cliente> aux2 : directorio.getDirectorio().entrySet()) {
-                Cliente buscado = aux2.getValue();
-                if (buscado.getDni() == Integer.parseInt(dniSeleccionadoStr)) {
-
-                    buscarApellido.setText();.getApellido();                
-                    buscarNombre.getNombre();
-                    buscarDomicilio.getDomicilio();
-                    aux.getKey()
-                    aux2.getKey().toString()                                                                     
-                }
-            }
-     }
-    }*/
-    
-    /*private void cargarInformacionContacto() {
-        Long telefonoSeleccionado = listaTelefono.getSelectedValue();
-        
-        if (telefonoSeleccionado != null) {
-            Cliente cliente = frmMenuPrincipal.direct.buscarContacto(telefonoSeleccionado);
-            
-            for(Map.Entry<String,DirectorioTelefonico> aux: frmMenuPrincipal.directorioPrincipal.entrySet() ){
-                Cliente buscado= aux.getValue().buscarContacto((listaTelefono.getSelectedValue()));
-            }
-            
-            if (cliente != null) {
-                buscarDni.setText(Long.toString(cliente.getDni()));
-                buscarNombre.setText(cliente.getNombre());
-                buscarApellido.setText(cliente.getApellido());
-                buscarCiudad.setText(buscarCiudad());
-                buscarDomicilio.setText(cliente.getDomicilio());
-            } else {
-                limpiarCampos();
-            }
-        } else {
-            limpiarCampos();
-        }
-    }*/
-    
     private void limpiarCampos() {
         buscarDni.setText("");
         buscarNombre.setText("");
@@ -293,10 +238,30 @@ public class ventanaBuscarCliente extends javax.swing.JInternalFrame {
         });
     }//GEN-LAST:event_listaTelefonoValueChanged
 
-    private void buscarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarClienteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_buscarClienteActionPerformed
-
+    private void buscarPorTxt() {
+        if (buscarCliente.getText().isEmpty()) {
+            return;
+        } else {
+            for (Map.Entry<String, DirectorioTelefonico> aux : frmMenuPrincipal.directorioPrincipal.entrySet()) {
+                Cliente buscado = aux.getValue().buscarContacto((Long.parseLong(buscarCliente.getText())));
+                buscarApellido.setText(buscado.getApellido());
+                buscarDni.setText(Integer.toString(buscado.getDni()));
+                buscarNombre.setText(buscado.getNombre());
+                buscarCiudad.setText(aux.getKey());
+                buscarDomicilio.setText(buscado.getDomicilio());
+            }
+        }
+    }
+    
+    private void buscarClienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscarClienteKeyTyped
+        buscarCliente.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            buscarPorTxt();
+        }
+    });
+    }//GEN-LAST:event_buscarClienteKeyTyped
+                
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSalir;

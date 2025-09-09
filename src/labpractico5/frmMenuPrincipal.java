@@ -40,16 +40,16 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         escritorio = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        menuClientes = new javax.swing.JMenu();
         menuAgregarCliente = new javax.swing.JMenuItem();
         menuBuscarCliente = new javax.swing.JMenuItem();
         menuBorrarCliente = new javax.swing.JMenuItem();
-        jMenu5 = new javax.swing.JMenu();
-        jMenuItem13 = new javax.swing.JMenuItem();
-        jMenuItem14 = new javax.swing.JMenuItem();
-        jMenu6 = new javax.swing.JMenu();
+        menuDirectorio = new javax.swing.JMenu();
+        menuBuscarCiudad = new javax.swing.JMenuItem();
+        menuBuscarApellido = new javax.swing.JMenuItem();
+        menuCiudades = new javax.swing.JMenu();
         menuAgregarCiudad = new javax.swing.JMenuItem();
-        jMenu7 = new javax.swing.JMenu();
+        menuOut = new javax.swing.JMenu();
         menuSalir = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -82,8 +82,8 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jMenu1.setBackground(new java.awt.Color(0, 0, 0));
-        jMenu1.setText("Clientes");
+        menuClientes.setBackground(new java.awt.Color(0, 0, 0));
+        menuClientes.setText("Clientes");
 
         menuAgregarCliente.setBackground(new java.awt.Color(204, 204, 204));
         menuAgregarCliente.setText("Agregar Cliente");
@@ -92,7 +92,7 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
                 menuAgregarClienteActionPerformed(evt);
             }
         });
-        jMenu1.add(menuAgregarCliente);
+        menuClientes.add(menuAgregarCliente);
 
         menuBuscarCliente.setText("Buscar Cliente");
         menuBuscarCliente.addActionListener(new java.awt.event.ActionListener() {
@@ -100,7 +100,7 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
                 menuBuscarClienteActionPerformed(evt);
             }
         });
-        jMenu1.add(menuBuscarCliente);
+        menuClientes.add(menuBuscarCliente);
 
         menuBorrarCliente.setText("Borrar Cliente");
         menuBorrarCliente.addActionListener(new java.awt.event.ActionListener() {
@@ -108,30 +108,35 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
                 menuBorrarClienteActionPerformed(evt);
             }
         });
-        jMenu1.add(menuBorrarCliente);
+        menuClientes.add(menuBorrarCliente);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(menuClientes);
 
-        jMenu5.setBackground(new java.awt.Color(204, 204, 204));
-        jMenu5.setForeground(new java.awt.Color(0, 0, 0));
-        jMenu5.setText("Directorio");
+        menuDirectorio.setBackground(new java.awt.Color(204, 204, 204));
+        menuDirectorio.setForeground(new java.awt.Color(0, 0, 0));
+        menuDirectorio.setText("Directorio");
 
-        jMenuItem13.setText("Buscar Cliente por ciudad");
-        jMenuItem13.addActionListener(new java.awt.event.ActionListener() {
+        menuBuscarCiudad.setText("Buscar Cliente por ciudad");
+        menuBuscarCiudad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem13ActionPerformed(evt);
+                menuBuscarCiudadActionPerformed(evt);
             }
         });
-        jMenu5.add(jMenuItem13);
+        menuDirectorio.add(menuBuscarCiudad);
 
-        jMenuItem14.setText("Buscar telefono por apellido");
-        jMenu5.add(jMenuItem14);
+        menuBuscarApellido.setText("Buscar telefono por apellido");
+        menuBuscarApellido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuBuscarApellidoActionPerformed(evt);
+            }
+        });
+        menuDirectorio.add(menuBuscarApellido);
 
-        jMenuBar1.add(jMenu5);
+        jMenuBar1.add(menuDirectorio);
 
-        jMenu6.setBackground(new java.awt.Color(204, 204, 204));
-        jMenu6.setForeground(new java.awt.Color(0, 0, 0));
-        jMenu6.setText("Ciudades");
+        menuCiudades.setBackground(new java.awt.Color(204, 204, 204));
+        menuCiudades.setForeground(new java.awt.Color(0, 0, 0));
+        menuCiudades.setText("Ciudades");
 
         menuAgregarCiudad.setText("Agregar Ciudad");
         menuAgregarCiudad.addActionListener(new java.awt.event.ActionListener() {
@@ -139,13 +144,13 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
                 menuAgregarCiudadActionPerformed(evt);
             }
         });
-        jMenu6.add(menuAgregarCiudad);
+        menuCiudades.add(menuAgregarCiudad);
 
-        jMenuBar1.add(jMenu6);
+        jMenuBar1.add(menuCiudades);
 
-        jMenu7.setBackground(new java.awt.Color(204, 204, 204));
-        jMenu7.setForeground(new java.awt.Color(0, 0, 0));
-        jMenu7.setText("Salir");
+        menuOut.setBackground(new java.awt.Color(204, 204, 204));
+        menuOut.setForeground(new java.awt.Color(0, 0, 0));
+        menuOut.setText("Salir");
 
         menuSalir.setText("Salir");
         menuSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -153,9 +158,9 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
                 menuSalirActionPerformed(evt);
             }
         });
-        jMenu7.add(menuSalir);
+        menuOut.add(menuSalir);
 
-        jMenuBar1.add(jMenu7);
+        jMenuBar1.add(menuOut);
 
         setJMenuBar(jMenuBar1);
 
@@ -217,13 +222,20 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
         centrarInternalFrame(ventanaBorrar);
     }//GEN-LAST:event_menuBorrarClienteActionPerformed
 
-    private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
+    private void menuBuscarCiudadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuBuscarCiudadActionPerformed
         VentanaBuscarCiudad ventanaBuscarCiudad= new VentanaBuscarCiudad();
         escritorio.add(ventanaBuscarCiudad);
         ventanaBuscarCiudad.setVisible(true);
         centrarInternalFrame(ventanaBuscarCiudad);
         
-    }//GEN-LAST:event_jMenuItem13ActionPerformed
+    }//GEN-LAST:event_menuBuscarCiudadActionPerformed
+
+    private void menuBuscarApellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuBuscarApellidoActionPerformed
+        ventBuscarPorApellido ventanaApellido = new ventBuscarPorApellido();
+        escritorio.add(ventanaApellido);
+        ventanaApellido.setVisible(true);
+        centrarInternalFrame(ventanaApellido);
+    }//GEN-LAST:event_menuBuscarApellidoActionPerformed
 
     private void centrarInternalFrame(JInternalFrame internalFrame) {
         // Centrar el internal frame en el escritorio
@@ -269,18 +281,18 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane escritorio;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu5;
-    private javax.swing.JMenu jMenu6;
-    private javax.swing.JMenu jMenu7;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem13;
-    private javax.swing.JMenuItem jMenuItem14;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JMenuItem menuAgregarCiudad;
     private javax.swing.JMenuItem menuAgregarCliente;
     private javax.swing.JMenuItem menuBorrarCliente;
+    private javax.swing.JMenuItem menuBuscarApellido;
+    private javax.swing.JMenuItem menuBuscarCiudad;
     private javax.swing.JMenuItem menuBuscarCliente;
+    private javax.swing.JMenu menuCiudades;
+    private javax.swing.JMenu menuClientes;
+    private javax.swing.JMenu menuDirectorio;
+    private javax.swing.JMenu menuOut;
     private javax.swing.JMenuItem menuSalir;
     // End of variables declaration//GEN-END:variables
 }

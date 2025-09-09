@@ -56,6 +56,7 @@ public class DirectorioTelefonico {
         }
       return listaNumeros;
     }
+    
     public void BorraContacto(Long telefono){
         directorio.remove(telefono);
     }
